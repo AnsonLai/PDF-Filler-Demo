@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.2"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</head>
+
+<style>
+</style>
+
+<body class="d-flex flex-column" style="min-height: 100vh;">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+      <a class="navbar-brand ms-4" href="#">
+        <span class="h3">jsfiddle demo</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </header>
+
+
+
+  <main class="flex-grow-1">
+
+    <div class="mb-3">
+      <label for="input_firstname" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="input_firstname">
+      <label for="input_lastname" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="input_lastname">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button id="dl_privacy" class="btn btn-primary"
+      onclick="fillForm('smallpdf_unlocked/Privacy-Notice-and-Consent-PNC-unlocked.pdf');">Download Privacy
+      Notice</button>
+    <button id="dl_fintrac" class="btn btn-primary"
+      onclick="fillForm('smallpdf_unlocked/FINTRAC-Individual-Identification-Information-Record-unlocked.pdf');">Download
+      FINTRAC</button>
+
+
+
+  </main>
+
+
+  <footer class="page-footer font-small text-white bg-primary">
+    <div class="footer-copyright text-center py-3">
+      <p>jsfiddle demo</p>
+    </div>
+
+  </footer>
+
+
+</body>
+
+<script>
+  var firstname = "John";
+  var lastname = "Smith";
+
+
+
+  function update_variables() {
+    firstname = $('#input_firstname').val();
+    lastname = $('#input_lastname').val();
+
+    var form_data = {
+      'smallpdf_unlocked/Privacy-Notice-and-Consent-PNC-unlocked.pdf': {
+        'txtCustomerName1': {
+          'type': 'PDFTextField',
+          'data': firstname + " " + lastname
+        },
+        'txtSignDate_mmmmm': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtSignDate_d': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtSignDate_y': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtCustomerName2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtSignDate2_mmmmm': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtSignDate2_d': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtSignDate2_y': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'DISCLAIMER': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtCurrentUserFullName': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtCurrentUserOfficeName': 'ENTER VARIABLE'
+      },
+      'smallpdf_unlocked/FINTRAC-Individual-Identification-Information-Record-unlocked.pdf': {
+        'txtp_streetnum': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtp_street': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtp_unitNumber': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtp_city': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtProvince': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtp_zipcode': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtpropAddrLine2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtAgent': {
+          'type': 'PDFTextField',
+          'data': `${firstname} ${lastname}`
+        },
+        'txtBroker': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtverifieddate1_mmmm': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtverifieddate1_d': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtverifieddate1_yyyy': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtindividualName': {
+          'type': 'PDFTextField',
+          'data': `${firstname} ${lastname}`
+        },
+        'txtindividualAddress1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtindividualAddress2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtindividualDOB': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtnatureOfBusinessOccupation': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtidDocument': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtdocIdentifierNumber': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtissuingJurisdiction': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtissuingCountry': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtdocumentExpiryDated1_mmmm': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtdocumentExpiryDated1_d': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtdocumentExpiryDated1_yyyy': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtcreditBureau1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtcreditBureau2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtcreditBureauRefNum': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtsourceName1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtBillNumber1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtsourceName2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtBillNumber2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtsourceName3': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtacctType': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtBillNumber3': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtascertainIdentityExplain1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtascertainIdentityExplain2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtascertainIdentityDated1_mmmm': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtascertainIdentityDated1_d': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtascertainIdentityDated1_yyyy': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtreasonsMeasuresUnsuccessful1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtreasonsMeasuresUnsuccessful2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyName': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyAddress1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyAddress2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyDOB': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyBusinessOccupation1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyBusinessOccupation2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyIncorporationNumber1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyIncorporationNumber2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'DISCLAIMER': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtlowRiskExplain': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtmedRiskExplain': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txthighRiskExplain': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtD1explain1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtD2explain1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtD2explain2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyRelationship1': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyRelationship2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyReasonsMeasuresTaken': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        'txtthirdPartyReasonsMeasuresTaken2': {
+          'type': 'PDFTextField',
+          'data': 'ENTER VARIABLE'
+        },
+        // PDFCheckBox
+        'chkOpt_dualID1': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_dualID2': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_dualID3': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_ascertainIdentity': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_reasonsMeasuresUnsccessful': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_transConductedBehalfClient': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_lowRisk': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_medRisk': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_highRisk': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_D1a': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_D1b': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_D1c': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_D1d': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+        'chkOpt_D1e': {
+          'type': 'PDFCheckBox',
+          'data': 'check'
+        },
+      }
+    }
+    return form_data
+  }
+</script>
+
+
+<script>
+
+  // https://stackoverflow.com/questions/25354313/saving-a-uint8array-to-a-binary-file
+  var downloadBlob, downloadURL;
+
+  downloadBlob = function (data, fileName, mimeType) {
+    var blob, url;
+    blob = new Blob([data], {
+      type: mimeType
+    });
+    url = window.URL.createObjectURL(blob);
+    downloadURL(url, fileName);
+    setTimeout(function () {
+      return window.URL.revokeObjectURL(url);
+    }, 1000);
+  };
+
+  downloadURL = function (data, fileName) {
+    var a;
+    a = document.createElement('a');
+    a.href = data;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    a.click();
+    a.remove();
+  };
+
+
+  async function fillForm(path) {
+    var form_data = await update_variables();
+    const formUrl = path;
+    const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(formPdfBytes, { ignoreEncryption: true })
+    const form = pdfDoc.getForm()
+
+    for (const [fieldname, datadict] of Object.entries(form_data[path])) {
+      var field = form.getField(fieldname)
+      switch (datadict['type']) {
+        case 'PDFTextField':
+          try {
+            field.setText(datadict['data'])
+          }
+          catch {
+
+          }
+          break;
+        case 'PDFCheckBox':
+          if (datadict['data'] == "check") {
+            field.check()
+          }
+          break;
+      }
+    }
+
+    const pdfBytes = await pdfDoc.save()
+
+    // smallpdf_unlocked/Privacy-Notice-and-Consent-PNC-unlocked.pdf
+    var outputname = path.replace('-unlocked', '').replace('smallpdf_unlocked/', '');
+
+    downloadBlob(pdfBytes, outputname, 'application/pdf')
+
+  }
+</script>
